@@ -1,6 +1,6 @@
 package com.petstore.swaggerspringbootpetstore.interceptor;
 
-import com.petstore.swaggerspringbootpetstore.until.CreateToken;
+import com.petstore.swaggerspringbootpetstore.util.CreateToken;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

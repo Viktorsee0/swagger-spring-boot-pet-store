@@ -3,7 +3,7 @@ package com.petstore.swaggerspringbootpetstore.service;
 import com.petstore.swaggerspringbootpetstore.dao.TokenDao;
 import com.petstore.swaggerspringbootpetstore.enity.Token;
 import com.petstore.swaggerspringbootpetstore.enity.pet.exception.InvalidPetIdException;
-import com.petstore.swaggerspringbootpetstore.until.CreateToken;
+import com.petstore.swaggerspringbootpetstore.util.CreateToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.petstore.swaggerspringbootpetstore.until;
+package com.petstore.swaggerspringbootpetstore.util;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
