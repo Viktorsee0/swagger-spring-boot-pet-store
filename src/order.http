@@ -1,0 +1,26 @@
+GET localhost:8080/store/order/inventory
+
+####
+
+
+POST localhost:8080/store/order
+Content-Type: application/json
+
+{
+  "id": 0,
+  "petId": 23,
+  "quantity": 0,
+  "shipDate": "2021-06-08T09:34:03.072Z",
+  "status": "placed",
+  "complete": true
+}
+
+###
+
+GET localhost:8080/store/order/3
+
+###
+
+DELETE localhost:8080/store/order/3
+
+###
