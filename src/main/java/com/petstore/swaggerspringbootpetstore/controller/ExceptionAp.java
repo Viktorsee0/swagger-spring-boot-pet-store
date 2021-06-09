@@ -10,38 +10,35 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler {
-    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidUsernameException.class)
+public class ExceptionAp extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(InvalidUsernameException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<AwesomeException> iue() {
         return new ResponseEntity<>(new AwesomeException("Invalid username supplied"), HttpStatus.BAD_REQUEST);
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(AuthorizationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AuthorizationException.class)
     protected ResponseEntity<AwesomeException> ae() {
         return new ResponseEntity<>(new AwesomeException("Invalid username/password supplied"), HttpStatus.BAD_REQUEST);
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidOrderIdException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidOrderIdException.class)
     protected ResponseEntity<AwesomeException> ioie() {
         return new ResponseEntity<>(new AwesomeException("Invalid ID supplied"), HttpStatus.BAD_REQUEST);
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidStatusValue.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidStatusValue.class)
     protected ResponseEntity<AwesomeException> isv() {
         return new ResponseEntity<>(new AwesomeException("Invalid status value"), HttpStatus.BAD_REQUEST);
     }
 
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidPetIdException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidPetIdException.class)
     protected ResponseEntity<AwesomeException> ipie() {
         return new ResponseEntity<>(new AwesomeException("Invalid ID supplied"), HttpStatus.BAD_REQUEST);
     }
