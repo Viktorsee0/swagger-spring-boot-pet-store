@@ -75,6 +75,4 @@ public class UserController {
     public void createUser(@RequestBody User user) {
         userService.createUser(user);
     }
-
-//    http://localhost:8080/swagger-ui/index.html
 }
