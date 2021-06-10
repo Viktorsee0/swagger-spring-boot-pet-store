@@ -3,7 +3,6 @@ Content-Type: application/json
 
 [
   {
-    "id": 0,
     "username": "111",
     "firstName": "111",
     "lastName": "111",
@@ -13,17 +12,15 @@ Content-Type: application/json
     "userStatus": 0
   },
   {
-    "id": 0,
     "username": "222",
     "firstName": "222",
     "lastName": "222",
     "email": "222",
     "password": "222",
     "phone": "222",
-    "userStatus": 0
+    "userStatus": 1
   },
   {
-    "id": 0,
     "username": "333",
     "firstName": "333",
     "lastName": "333",
@@ -40,17 +37,17 @@ GET localhost:8080/user/vitya
 
 ###
 
-PUT localhost:8080/user/111
+PUT localhost:8080/user/vitya
 Content-Type: application/json
 
 {
-  "id": 0,
-  "username": "vitya",
-  "firstName": "vitya",
-  "lastName": "vitya",
-  "email": "vitya",
-  "password": "vitya",
-  "phone": "vitya",
+  "id": 3,
+  "username": "333",
+  "firstName": "333",
+  "lastName": "333",
+  "email": "333",
+  "password": "333",
+  "phone": "333",
   "userStatus": 0
 }
 

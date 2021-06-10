@@ -2,7 +2,6 @@ package com.petstore.swaggerspringbootpetstore.interceptor;
 
 import com.petstore.swaggerspringbootpetstore.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@Component
+//@Component
 public class AuthorizationInterceptor implements HandlerInterceptor {
 
     @Autowired

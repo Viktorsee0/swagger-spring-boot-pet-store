@@ -3,7 +3,7 @@ package com.petstore.swaggerspringbootpetstore.service;
 import com.petstore.swaggerspringbootpetstore.dao.UserDao;
 import com.petstore.swaggerspringbootpetstore.enity.user.User;
 import com.petstore.swaggerspringbootpetstore.enity.user.exception.AuthorizationException;
-import com.petstore.swaggerspringbootpetstore.enity.user.exception.InvalidUsernameException;
+import com.petstore.swaggerspringbootpetstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,40 +15,33 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public void createWithList(List<User> users){
-        for (User user : users){
-           createUser(user);
-        }
+    @Autowired
+    private UserRepository userRepository;
+
+    public void createWithList(List<User> users) {
+        userRepository.saveAll(users);
     }
 
-    public void createUser(User user){
-        userDao.add(user);
+    public void createUser(User user) {
+        userRepository.save(user);
     }
 
-    public User getByUsername(String username){
-        if (!userDao.containsByUsername(username)){
-            throw  new InvalidUsernameException();
-        }
-        return userDao.getByUsername(username);
+    public User getByUsername(String username) {
+        return userRepository.getByUsername(username).orElse(null);
     }
 
-    public void updateUsername(String username, User user){
-        if (!userDao.containsByUsername(username)){
-            throw  new InvalidUsernameException();
-        }
-        userDao.updateUsername(username, user);
+    public void updateUsername(String username, User user) {
+        user.setUsername(username);
+        userRepository.save(user);
     }
 
     public void delete(String username) {
-        if (!userDao.containsByUsername(username)) {
-            throw new InvalidUsernameException();
-        }
-        userDao.delete(username);
+        userRepository.deleteByUsername(username);
     }
 
-    public User login(String username, String passwrod){
+    public User login(String username, String passwrod) {
         User byUsername = userDao.getByUsername(username);
-        if (byUsername == null && !byUsername.getPassword().equals(passwrod)){
+        if (byUsername == null && !byUsername.getPassword().equals(passwrod)) {
             throw new AuthorizationException();
         }
         return byUsername;

@@ -1,7 +1,6 @@
 package com.petstore.swaggerspringbootpetstore.controller;
 
 import com.petstore.swaggerspringbootpetstore.enity.pet.exception.InvalidPetIdException;
-import com.petstore.swaggerspringbootpetstore.enity.pet.exception.InvalidStatusValue;
 import com.petstore.swaggerspringbootpetstore.enity.store.exception.InvalidOrderIdException;
 import com.petstore.swaggerspringbootpetstore.enity.user.exception.AuthorizationException;
 import com.petstore.swaggerspringbootpetstore.enity.user.exception.InvalidUsernameException;
@@ -32,17 +31,10 @@ public class ExceptionAp extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new AwesomeException("Invalid ID supplied"), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(InvalidStatusValue.class)
-    protected ResponseEntity<AwesomeException> isv() {
-        return new ResponseEntity<>(new AwesomeException("Invalid status value"), HttpStatus.BAD_REQUEST);
-    }
-
-
     @ExceptionHandler(InvalidPetIdException.class)
     protected ResponseEntity<AwesomeException> ipie() {
         return new ResponseEntity<>(new AwesomeException("Invalid ID supplied"), HttpStatus.BAD_REQUEST);
     }
-
 
     @Data
     @AllArgsConstructor

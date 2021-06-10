@@ -1,6 +1,7 @@
 package com.petstore.swaggerspringbootpetstore.controller;
 
 import com.petstore.swaggerspringbootpetstore.enity.pet.Pet;
+import com.petstore.swaggerspringbootpetstore.enity.pet.PetStatus;
 import com.petstore.swaggerspringbootpetstore.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,21 +18,19 @@ public class PetController {
     private PetService petService;
 
     @PostMapping()
-    public ResponseEntity<Pet> add(@RequestBody Pet pet) {
-        petService.add(pet);
+    public ResponseEntity<?> add(@RequestBody Pet pet) {
+        petService.save(pet);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-
     @PutMapping
-    public ResponseEntity update(@RequestBody Pet pet) {
-
+    public ResponseEntity<?> update(@RequestBody Pet pet) {
         petService.update(pet);
-        return (ResponseEntity) ResponseEntity.ok();
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/findByStatus")
-    public ResponseEntity<List<Pet>> getByStatus(String status) {
+    public ResponseEntity<List<Pet>> getByStatus(PetStatus status) {
         List<Pet> pets = petService.getByStatus(status);
         return ResponseEntity.ok(pets);
     }
@@ -42,20 +41,16 @@ public class PetController {
         return ResponseEntity.ok(pet);
     }
 
-    //TODO
     @PostMapping("/{petId}")
-    public ResponseEntity updatePetById(@PathVariable long petId, String name, String status) {
+    public ResponseEntity updatePetById(@PathVariable long petId, String name, PetStatus status) {
         petService.updatePetById(petId, name, status);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
-
 
     @DeleteMapping("/{petId}")
     public ResponseEntity delete(@PathVariable long petId) {
         petService.delete(petId);
         return (ResponseEntity) ResponseEntity.accepted();
-
     }
-
 
 }

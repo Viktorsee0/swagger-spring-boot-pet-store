@@ -1,0 +1,71 @@
+POST localhost:8080/pet
+Content-Type: application/json
+#X-Token-Id: 5e6b233f-6dd9-4eb9-95f3-f4ca30568825
+
+{
+  "category": {
+    "name": "cat"
+  },
+  "name": "caty",
+  "tags": [
+    {
+      "name": "11"
+    },
+    {
+      "name": "23"
+    },
+    {
+      "name": "55"
+    }
+  ],
+  "status": "sold"
+}
+
+###
+
+PUT localhost:8080/pet
+Content-Type: application/json
+
+{
+  "id": 1,
+  "category": {
+    "name": "cat"
+  },
+  "name": "caty",
+  "tags": [
+    {
+      "id": 1,
+      "name": "111"
+    },
+    {
+      "id": 2,
+      "name": "222"
+    },
+    {
+      "id": 3,
+      "name": "333"
+    },
+    {
+      "name": "0000"
+    }
+  ],
+  "status": "sold"
+}
+
+####
+
+GET localhost:8080/pet/findByStatus?status=pending
+#X-Token-Id: 5e6b233f-6dd9-4eb9-95f3-f4ca30568825
+
+###
+
+GET localhost:8080/pet/1
+
+###
+
+POST localhost:8080/pet/1?name=asdasd&status=available
+
+
+####
+
+DELETE localhost:8080/pet/1

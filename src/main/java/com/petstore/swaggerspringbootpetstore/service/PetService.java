@@ -1,66 +1,63 @@
 package com.petstore.swaggerspringbootpetstore.service;
 
-import com.petstore.swaggerspringbootpetstore.dao.PetDao;
 import com.petstore.swaggerspringbootpetstore.enity.pet.Pet;
 import com.petstore.swaggerspringbootpetstore.enity.pet.PetStatus;
 import com.petstore.swaggerspringbootpetstore.enity.pet.exception.InvalidPetIdException;
-import com.petstore.swaggerspringbootpetstore.enity.pet.exception.InvalidStatusValue;
+import com.petstore.swaggerspringbootpetstore.repository.PetRepository;
+import com.petstore.swaggerspringbootpetstore.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PetService {
 
     @Autowired
-    private PetDao petDao;
+    TagRepository tagRepository;
 
-    public void add(Pet pet) {
-        petDao.add(pet);
+    @Autowired
+    PetRepository petRepository;
+
+    public void save(Pet pet) {
+        petRepository.save(pet);
     }
 
-    public List<Pet> getByStatus(String status) {
-
-        try {
-            PetStatus petStatus = PetStatus.valueOf(status);
-            return petDao.getByStatus(petStatus);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidStatusValue();
+    public void update(Pet pet) {
+        if (petRepository.existsById(pet.getId())) {
+            petRepository.save(pet);
         }
+        throw new  InvalidPetIdException();
+    }
 
+    public List<Pet> getByStatus(PetStatus status) {
+        Optional<List<Pet>> allByStatus = petRepository.findAllByStatus(status);
+        return allByStatus.get();
     }
 
     public Pet getPetById(Long id) {
-        if (!petDao.containsById(id)) {
-            throw new InvalidPetIdException();
+        Optional<Pet> byId = petRepository.findById(id);
+        if (byId.isPresent()) {
+            return byId.get();
         }
-        return petDao.gePetById(id);
+        throw new InvalidPetIdException();
     }
 
-    public void updatePetById(long id, String name, String status) {
-        try {
-            Pet pet = getPetById(id);
-            PetStatus petStatus = PetStatus.valueOf(status);
-            pet.setName(name);
-            pet.setStatus(petStatus);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidStatusValue();
+    public void updatePetById(long id, String name, PetStatus status) {
+        if (petRepository.existsById(id)){
+            Pet byId = petRepository.getById(id);
+            byId.setName(name);
+            byId.setStatus(status);
+            petRepository.save(byId);
         }
-    }
-
-    public void update(Pet pet){
-        Pet petById = getPetById(pet.getId());
-        petById.setName(pet.getName());
-        petById.setStatus(pet.getStatus());
-        petById.setCategory(pet.getCategory());
-        petById.setTags(pet.getTags());
+        throw new  InvalidPetIdException();
     }
 
     public void delete(Long id) {
-        if (!petDao.containsById(id)) {
-            throw new  InvalidPetIdException();
+        if (petRepository.existsById(id)) {
+            petRepository.deleteById(id);
         }
-        petDao.delete(id);
+        throw new  InvalidPetIdException();
     }
 }

@@ -29,9 +29,7 @@ public class UserController {
 
 
     @GetMapping("/{username}")
-    public ResponseEntity<User> getPetById(@PathVariable String username) {
-
-        System.out.println(username);
+    public ResponseEntity<User> getByUsername(@PathVariable String username) {
         User byUsername = userService.getByUsername(username);
         return ResponseEntity.ok(byUsername);
     }
@@ -45,7 +43,6 @@ public class UserController {
 
     @DeleteMapping("/{username}")
     public void delete(@PathVariable String username) {
-
         userService.delete(username);
     }
 
@@ -61,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(HttpServletRequest request) {
+    public ResponseEntity<?> logout(HttpServletRequest request) {
         tokenService.delete(request);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
