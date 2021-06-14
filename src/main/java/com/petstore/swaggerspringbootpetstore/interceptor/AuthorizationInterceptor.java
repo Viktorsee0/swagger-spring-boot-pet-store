@@ -2,6 +2,7 @@ package com.petstore.swaggerspringbootpetstore.interceptor;
 
 import com.petstore.swaggerspringbootpetstore.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-//@Component
+@Component
 public class AuthorizationInterceptor implements HandlerInterceptor {
 
     @Autowired
@@ -17,17 +18,13 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String header = request.getHeader("X-Token-Id");
+        String header = request.getHeader("X-Token");
 
         if (header == null ) {
             return false;
         }
 
-        if (tokenService.contains(header)){
-            return true;
-        }
-
-        return false;
+        return tokenService.contains(header);
 
     }
 

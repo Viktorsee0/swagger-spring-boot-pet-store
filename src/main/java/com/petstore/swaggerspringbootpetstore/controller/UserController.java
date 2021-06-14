@@ -1,5 +1,6 @@
 package com.petstore.swaggerspringbootpetstore.controller;
 
+import com.petstore.swaggerspringbootpetstore.enity.Token;
 import com.petstore.swaggerspringbootpetstore.enity.user.User;
 import com.petstore.swaggerspringbootpetstore.service.TokenService;
 import com.petstore.swaggerspringbootpetstore.service.UserService;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -43,18 +43,18 @@ public class UserController {
 
     @DeleteMapping("/{username}")
     public void delete(@PathVariable String username) {
+        System.out.println(username);
         userService.delete(username);
     }
 
     @GetMapping("/login")
     public ResponseEntity<String> login(String username,
-                                        String password,
-                                        HttpServletResponse response) {
+                                        String password) {
 
         User byUsername = userService.login(username, password);
-        String tokenId = tokenService.save(byUsername.getId(), response);
+        Token token = tokenService.save(byUsername.getId());
 
-        return ResponseEntity.ok(tokenId);
+        return ResponseEntity.ok(token.getId().toString());
     }
 
     @GetMapping("/logout")

@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "category": {
-    "name": "cat"
+    "name": "dog"
   },
   "name": "caty",
   "tags": [
@@ -18,7 +18,7 @@ Content-Type: application/json
       "name": "55"
     }
   ],
-  "status": "sold"
+  "status": "pending"
 }
 
 ###

@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ###
 
-GET localhost:8080/user/vitya
+GET localhost:8080/user/333
 
 ###
 
@@ -53,14 +53,13 @@ Content-Type: application/json
 
 ###
 
-DELETE localhost:8080/user/vitya
+DELETE localhost:8080/user/111
 
 ###
 
 GET localhost:8080/user/login?username=333&password=333
-#X-Expires-After: qweqweqw
 
 ###
 
 GET localhost:8080/user/logout
-X-Token-Id: a8524d69-1ea9-432c-9b05-29cd74c48ebf
+X-Token: c6cb865e-24bf-4f79-bc87-2d03cfcd6e73
