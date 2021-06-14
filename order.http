@@ -21,6 +21,6 @@ GET localhost:8080/store/order/1
 
 ###
 
-DELETE localhost:8080/store/order/3
+DELETE localhost:8080/store/order/1
 
 ###

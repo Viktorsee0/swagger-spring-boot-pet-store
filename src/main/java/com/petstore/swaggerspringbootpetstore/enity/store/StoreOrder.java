@@ -17,7 +17,6 @@ public class StoreOrder {
     private long id;
     private long petId;
     private long quantity;
-    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime shipDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

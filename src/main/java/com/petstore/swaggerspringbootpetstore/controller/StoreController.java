@@ -31,7 +31,6 @@ public class StoreController {
 
     @GetMapping("/order/{orderId}")
     public ResponseEntity<StoreOrder> createOrder(@PathVariable long orderId){
-        System.out.println(orderId);
         StoreOrder order = orderService.getById(orderId);
         return new ResponseEntity(order, HttpStatus.ACCEPTED);
     }

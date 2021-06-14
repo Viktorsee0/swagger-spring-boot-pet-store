@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class OrderService {
@@ -23,11 +24,11 @@ public class OrderService {
     public Map<String, Integer> inventory() {
         Map<String, Integer> petMap = new HashMap<>();
         List<Pet> pets = petRepository.findAll();
-        for (Pet pet : pets){
+        for (Pet pet : pets) {
             String key = pet.getCategory().getName();
-            if (petMap.containsKey(key)){
-                petMap.put(key, petMap.get(key)+1);
-            }else {
+            if (petMap.containsKey(key)) {
+                petMap.put(key, petMap.get(key) + 1);
+            } else {
                 petMap.put(pet.getCategory().getName(), 1);
             }
         }
@@ -39,19 +40,19 @@ public class OrderService {
     }
 
     public StoreOrder getById(long id) {
-        chekId(id);
-        return storeRepository.getById(id);
+        Optional<StoreOrder> byId = storeRepository.findById(id);
+        if (byId.isEmpty()) {
+            throw new InvalidOrderIdException();
+        }
+
+        return byId.get();
     }
 
     public boolean delete(long id) {
-        chekId(id);
-        storeRepository.deleteById(id);
-        return true;
-    }
-
-    private void chekId(long id) {
         if (!storeRepository.existsById(id)) {
             throw new InvalidOrderIdException();
         }
+        storeRepository.deleteById(id);
+        return true;
     }
 }
