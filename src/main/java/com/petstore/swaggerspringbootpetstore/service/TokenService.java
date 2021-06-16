@@ -6,10 +6,13 @@ import com.petstore.swaggerspringbootpetstore.repository.TokenRepository;
 import com.petstore.swaggerspringbootpetstore.util.CreateToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Component
+@Service
+@Transactional
 public class TokenService {
 
     @Autowired

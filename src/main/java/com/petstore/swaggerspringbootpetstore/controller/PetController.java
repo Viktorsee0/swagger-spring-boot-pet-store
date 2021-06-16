@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,13 +19,13 @@ public class PetController {
     private PetService petService;
 
     @PostMapping()
-    public ResponseEntity<?> add(@RequestBody Pet pet) {
+    public ResponseEntity<?> add(@Valid @RequestBody Pet pet) {
         petService.save(pet);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody Pet pet) {
+    public ResponseEntity<?> update(@Valid @RequestBody Pet pet) {
         petService.update(pet);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }

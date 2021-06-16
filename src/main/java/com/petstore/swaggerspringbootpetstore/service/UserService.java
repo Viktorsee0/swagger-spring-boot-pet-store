@@ -1,16 +1,29 @@
 package com.petstore.swaggerspringbootpetstore.service;
 
+import com.petstore.swaggerspringbootpetstore.enity.pet.Category;
+import com.petstore.swaggerspringbootpetstore.enity.pet.Pet;
+import com.petstore.swaggerspringbootpetstore.enity.pet.PetStatus;
+import com.petstore.swaggerspringbootpetstore.enity.pet.Tag;
+import com.petstore.swaggerspringbootpetstore.enity.pet.exception.InvalidPetIdException;
 import com.petstore.swaggerspringbootpetstore.enity.user.User;
 import com.petstore.swaggerspringbootpetstore.enity.user.exception.AuthorizationException;
+import com.petstore.swaggerspringbootpetstore.repository.CategoryRepository;
+import com.petstore.swaggerspringbootpetstore.repository.PetRepository;
+import com.petstore.swaggerspringbootpetstore.repository.TagRepository;
 import com.petstore.swaggerspringbootpetstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
+@Transactional
 public class UserService {
+
 
     @Autowired
     private UserRepository userRepository;

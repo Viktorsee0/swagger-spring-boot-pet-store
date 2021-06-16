@@ -5,11 +5,15 @@ import com.petstore.swaggerspringbootpetstore.enity.user.User;
 import com.petstore.swaggerspringbootpetstore.service.TokenService;
 import com.petstore.swaggerspringbootpetstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
@@ -23,21 +27,23 @@ public class UserController {
     private TokenService tokenService;
 
     @PostMapping("/createWithList")
-    public void createWithList(@RequestBody List<User> users) {
+    public void createWithList(@Valid @RequestBody List<User> users) {
         userService.createWithList(users);
     }
 
 
     @GetMapping("/{username}")
-    public ResponseEntity<User> getByUsername(@PathVariable String username) {
+    public ResponseEntity<User> getByUsername(@Size(min = 3, max = 10, message = "About Me must be between 3 and 10 characters")
+                                              @NotNull
+                                              @PathVariable String username) {
+        System.out.println(username);
         User byUsername = userService.getByUsername(username);
         return ResponseEntity.ok(byUsername);
     }
 
     @PutMapping("/{username}")
     public void changeUsername(@PathVariable String username,
-                               @RequestBody User user) {
-
+                               @Valid @RequestBody User user) {
         userService.updateUsername(username, user);
     }
 
@@ -64,12 +70,12 @@ public class UserController {
     }
 
     @PostMapping("/createWithArray")
-    public void createWithArray(@RequestBody List<User> users) {
+    public void createWithArray(@Valid @RequestBody List<User> users) {
         userService.createWithList(users);
     }
 
     @PostMapping()
-    public void createUser(@RequestBody User user) {
+    public void createUser(@Valid @RequestBody User user) {
         userService.createUser(user);
     }
 }
